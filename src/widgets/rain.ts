@@ -27,7 +27,6 @@ export class Rain implements IWidget {
   constructor () {
     this.canvas = new Canvas('rain')
     this.createDrops()
-    console.log(this.drops)
     this.tick = this.tick.bind(this)
   }
 
