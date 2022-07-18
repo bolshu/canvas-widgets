@@ -10,6 +10,7 @@ export class Bezier implements IWidget {
   private readonly CLR_LINE: string = 'rgba(255, 255, 255, 0.25)'
   private readonly LINE_WIDTH: number = 3
   private readonly LINES_COUNT: number = 200
+  private readonly SPEED: number = 0.025
   private readonly R: number = 2
   private readonly R_MIN: number = 1
 
@@ -20,7 +21,6 @@ export class Bezier implements IWidget {
     this.canvas = new Canvas('bezier')
     this.generateLines()
     this.tick = this.tick.bind(this)
-    console.log(this.LINES_COUNT)
   }
 
   private generateLines (): void {
@@ -42,13 +42,6 @@ export class Bezier implements IWidget {
     }
   }
 
-  private drawDot(x: number, y: number, color: string): void {
-    this.canvas.context.fillStyle = color
-    this.canvas.context.beginPath()
-    this.canvas.context.arc(x, y, 5, 0, Math.PI * 2)
-    this.canvas.context.fill()
-  }
-
   private drawBezier ({ x1, y1, p1x, p1y, x2, y2, p2x, p2y }: TLineProps) {
     this.canvas.context.strokeStyle = this.CLR_LINE
     this.canvas.context.lineWidth = this.LINE_WIDTH
@@ -62,10 +55,8 @@ export class Bezier implements IWidget {
   private updateLineProps (line: TLineProps): void {
     line.p1y -= Math.cos(line.angle) * line.r
     line.p2y += Math.cos(-line.angle) * line.r
-    // line.p1y += line.p1y * line.angle * Math.random() > 0.5 ? -1 : 1
-    // line.p2y += line.p2y * line.angle * Math.random() > 0.5 ? -1 : 1
 
-    line.angle += 0.025
+    line.angle += this.SPEED
   }
 
   private tick (): void {
@@ -75,8 +66,6 @@ export class Bezier implements IWidget {
     for (const line of this.lines) {
       this.drawBezier(line)
       this.updateLineProps(line)
-      // this.drawDot(line.p1x, line.p1y, 'red')
-      // this.drawDot(line.p2x, line.p2y, 'green')
     }
   }
 
