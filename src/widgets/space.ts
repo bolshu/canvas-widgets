@@ -11,12 +11,12 @@ type TStart = {
 export class Space implements IWidget {
   private readonly CLR_STAR: string = 'white'
   private readonly CLR_BG: string = 'black'
-  private readonly SPEED: number = 6
-  private readonly SPEED_MULTIPLIER: number = 0.8
+  private readonly SPEED: number = 8
+  private readonly SPEED_MULTIPLIER: number = 0.6
   private readonly STAR_COUNT: number = 80
   private readonly STAR_DELAY: number = 50
   private readonly STAR_SIZE_INITIAL: number = 0
-  private readonly STAR_SIZE_INCREMENT: number = 0.03
+  private readonly STAR_SIZE_INCREMENT: number = 0.025
   private stars: TStart[] = []
 
   private canvas: Canvas
@@ -40,15 +40,17 @@ export class Space implements IWidget {
     }
   }
 
-  private drawStar ({ x, y, r }: TStart): void {
-    this.canvas.context.fillStyle = this.CLR_STAR
-
-    this.canvas.context.beginPath()
-    this.canvas.context.arc(x, y, r, 0, Math.PI * 2)
-    this.canvas.context.fill()
+  private drawStars (): void {
+    for (const star of this.stars) {
+      this.canvas.context.fillStyle = this.CLR_STAR
+      
+      this.canvas.context.beginPath()
+      this.canvas.context.arc(star.x, star.y, star.r, 0, Math.PI * 2)
+      this.canvas.context.fill()
+    }
   }
 
-  private updateStar () {
+  private updateStars () {
     this.stars.forEach((star, index) => {
       if (
         star.x + star.r > this.canvas.element.width || star.x + star.r < 0 ||
@@ -77,11 +79,8 @@ export class Space implements IWidget {
     this.canvas.context.fillStyle = this.CLR_BG
     this.canvas.context.fillRect(0, 0, this.canvas.element.width, this.canvas.element.height)
 
-    for (const star of this.stars) {
-      this.drawStar(star)
-    }
-
-    this.updateStar()
+    this.drawStars()
+    this.updateStars()
   }
 
   public start (): void {
