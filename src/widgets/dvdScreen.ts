@@ -60,7 +60,7 @@ export class DVDScreen implements IWidget {
   }
 
   private getRandomText(): string {
-    const texts = ['Написано хуй', 'Здарова', 'Квадрат', 'Двигается', 'Уиииии', 'Стукнулся', 'Перестань']
+    const texts = ['Написано «хуй»', 'Здарова', 'Квадрат', 'Двигается', 'Уиииии', 'Стукнулся', 'Перестань']
     const availableTexts = texts.filter((it: string) => this.text !== it)
 
     return availableTexts[Math.floor(availableTexts.length * Math.random())];
