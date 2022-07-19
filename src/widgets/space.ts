@@ -74,10 +74,9 @@ export class Space implements IWidget {
   }
 
   private tick (): void {
-    this.canvas.clear()
-
-    this.canvas.context.fillStyle = this.CLR_BG
+    this.canvas.context.fillStyle = 'rgba(0,0,0,0.75)'
     this.canvas.context.fillRect(0, 0, this.canvas.element.width, this.canvas.element.height)
+
 
     this.drawStars()
     this.updateStars()
