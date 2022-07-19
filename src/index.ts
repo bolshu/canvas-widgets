@@ -1,5 +1,6 @@
 import { BaseStyles } from './modules/BaseStyles'
 import { Space } from './widgets/space'
+import { DVDScreen } from './widgets/dvdScreen'
 import { Rain } from './widgets/rain'
 import { Bezier } from './widgets/bezier'
 import { Sin } from './widgets/sin'
@@ -10,6 +11,7 @@ BaseStyles.apply()
 const widgets: IWidget[] = []
 
 widgets.push(new Space())
+widgets.push(new DVDScreen())
 widgets.push(new Rain())
 widgets.push(new Bezier())
 widgets.push(new Sin())
