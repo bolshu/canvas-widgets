@@ -43,7 +43,7 @@ export class Space implements IWidget {
   private drawStars (): void {
     for (const star of this.stars) {
       this.canvas.context.fillStyle = this.CLR_STAR
-      
+
       this.canvas.context.beginPath()
       this.canvas.context.arc(star.x, star.y, star.r, 0, Math.PI * 2)
       this.canvas.context.fill()
@@ -76,7 +76,6 @@ export class Space implements IWidget {
   private tick (): void {
     this.canvas.context.fillStyle = 'rgba(0,0,0,0.75)'
     this.canvas.context.fillRect(0, 0, this.canvas.element.width, this.canvas.element.height)
-
 
     this.drawStars()
     this.updateStars()
