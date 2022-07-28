@@ -35,13 +35,13 @@ export class Rotation implements IWidget {
   }
 
   private addMouseDownListener (): void {
-    this.canvas.element.addEventListener('mousedown', () => {
+    this.canvas.element.addEventListener('mouseenter', () => {
       this.isEffectApplied = true
     })
   }
 
   private addMouseUpListener (): void {
-    this.canvas.element.addEventListener('mouseup', () => {
+    this.canvas.element.addEventListener('mouseleave', () => {
       this.isEffectApplied = false
     })
   }
