@@ -75,6 +75,8 @@ export class App {
 
     this.createNav()
     this.appNav = document.getElementById(this.NODE_ID_NAV)!
+    this.addNavClickListener()
+
 
     this.createCanvasWrapper()
     this.appWidget = document.getElementById(this.NODE_ID_WIDGET)!
@@ -109,8 +111,6 @@ export class App {
     nav.style.borderRight = '1px solid lightgray'
 
     this.appWrapper.appendChild(nav)
-
-    this.addNavClickListener()
   }
 
   private addNavClickListener () {
