@@ -1,12 +1,12 @@
-import { Canvas } from '../modules/Canvas'
-import { IWidget } from './widget'
+import { IWidget } from './types'
+import { WithCanvas } from './withCanvas'
 
-export class Sin implements IWidget {
-  private readonly OFFSET: number = 250
+export class Sin extends WithCanvas implements IWidget {
+  private readonly OFFSET: number
   private readonly AXIS_OFFSET: number = 40
   private readonly AMPLITUDE: number = 0.05
   private readonly SPEED: number = 0.03
-  private readonly R: number = (this.OFFSET / 4) * 2
+  private readonly R: number = 150
   private readonly POINT_R: number = 5
   private readonly CLR_ACCENT: string = 'black'
   private readonly CLR_ADDITIONAL: string = 'white'
@@ -14,10 +14,11 @@ export class Sin implements IWidget {
   private dx: number = 0
   private dy: number = 0
   private angle: number = 0
-  private canvas: Canvas
 
-  constructor () {
-    this.canvas = new Canvas('sin')
+  constructor (parentNode: HTMLElement) {
+    super(parentNode)
+
+    this.OFFSET = this.canvas.centerY
     this.tick = this.tick.bind(this)
   }
 

@@ -1,5 +1,5 @@
-import { Canvas } from '../modules/Canvas'
-import { IWidget } from './widget'
+import { IWidget } from './types'
+import { WithCanvas } from './withCanvas'
 
 type TStar = {
   x: number;
@@ -8,7 +8,7 @@ type TStar = {
   color: string;
 }
 
-export class Rotation implements IWidget {
+export class Rotation extends WithCanvas implements IWidget {
   private readonly STARS_COUNT: number = 200
   private readonly STAR_R_MIN: number = 1
   private readonly STAR_BLUR_R: number = 15
@@ -21,10 +21,10 @@ export class Rotation implements IWidget {
   private alpha: number = 0.05
   private isEffectApplied = false
   private maxSideSize: number
-  private canvas: Canvas
 
-  constructor () {
-    this.canvas = new Canvas('rotation')
+  constructor (parentNode: HTMLElement) {
+    super(parentNode)
+
     this.maxSideSize = Math.max(this.canvas.element.width, this.canvas.element.height)
 
     this.createStars()

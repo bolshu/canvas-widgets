@@ -1,40 +1,32 @@
 export class Canvas {
-  private readonly W: number = 1000
-  private readonly H: number = 500
   readonly element: HTMLCanvasElement
   readonly context: CanvasRenderingContext2D
   readonly centerX: number
   readonly centerY: number
   private animationId: number | null
 
-  constructor (id: string) {
-    this.addCanvas(id)
+  constructor (parentNode: HTMLElement) {
+    this.addCanvas(parentNode)
 
-    this.element = <HTMLCanvasElement>document.getElementById(id)!
+    this.element = <HTMLCanvasElement>document.getElementsByTagName('CANVAS')[0]!
     this.context = this.element.getContext('2d')!
     this.centerX = this.element.width / 2
     this.centerY = this.element.height / 2
     this.animationId = null
   }
 
-  private addCanvas (id: string) {
+  private addCanvas (parentNode: HTMLElement) {
     const canvas = document.createElement('canvas')
-    const w = this.W.toString()
-    const h = this.H.toString()
+    const { width, height } = parentNode.getBoundingClientRect()
 
-    canvas.setAttribute('id', id)
-    canvas.setAttribute('width', w)
-    canvas.setAttribute('height', h)
+    canvas.setAttribute('width', width.toString())
+    canvas.setAttribute('height', height.toString())
 
     canvas.style.display = 'block'
-    canvas.style.width = w + 'px'
-    canvas.style.height = h + 'px'
-    canvas.style.marginLeft = 'auto'
-    canvas.style.marginTop = '50px'
-    canvas.style.marginBottom = '50px'
-    canvas.style.marginRight = 'auto'
+    canvas.style.width = width + 'px'
+    canvas.style.height = height + 'px'
 
-    document.body.appendChild(canvas)
+    parentNode.appendChild(canvas)
   }
 
   public startAnimation (callback: () => void) {

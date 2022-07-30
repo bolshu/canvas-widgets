@@ -1,7 +1,7 @@
-import { Canvas } from '../modules/Canvas'
-import { IWidget } from './widget'
+import { WithCanvas } from './withCanvas'
+import { IWidget } from './types'
 
-export class DVDScreen implements IWidget {
+export class DVDScreen extends WithCanvas implements IWidget {
   private readonly CLR_BG: string = 'black'
   private readonly SPEED: number = 3
   private readonly SIZE: number = 150
@@ -13,10 +13,9 @@ export class DVDScreen implements IWidget {
   private angle: number
   private text: string
 
-  private canvas: Canvas
+  constructor (parentNode: HTMLElement) {
+    super(parentNode)
 
-  constructor () {
-    this.canvas = new Canvas('dvd-screen')
     this.color = this.getRandomColor()
     this.x = this.canvas.centerX - this.SIZE / 2
     this.y = this.canvas.centerY - this.SIZE / 2

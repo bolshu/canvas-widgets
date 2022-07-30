@@ -1,3 +1,3 @@
 export interface IWidget {
-    start: () => void
+    start: () => void;
 }

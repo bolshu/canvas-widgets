@@ -1,5 +1,5 @@
-import { Canvas } from '../modules/Canvas'
-import { IWidget } from './widget'
+import { WithCanvas } from './withCanvas'
+import { IWidget } from './types'
 
 type TDrop = {
   x: number,
@@ -8,9 +8,8 @@ type TDrop = {
   r: number
 }
 
-export class Rain implements IWidget {
-  private readonly CLR_ACCENT: string = 'white'
-  private readonly CLR_ADDITIONAL: string = 'DarkSlateGray'
+export class Rain extends WithCanvas implements IWidget {
+  private readonly DROP_COLOR: string = 'DarkSlateGray'
   private readonly DROP_SPEED: number = 3
   private readonly DROP_COUNT: number = 100
   private readonly DROP_RATIO: number = 3
@@ -22,16 +21,15 @@ export class Rain implements IWidget {
   private drops: TDrop[] = []
   private miniDrops: TDrop[] = []
 
-  private canvas: Canvas
+  constructor (parentNode: HTMLElement) {
+    super(parentNode)
 
-  constructor () {
-    this.canvas = new Canvas('rain')
     this.createDrops()
     this.tick = this.tick.bind(this)
   }
 
   private drawSky (): void {
-    this.canvas.context.fillStyle = this.CLR_ADDITIONAL
+    this.canvas.context.fillStyle = this.DROP_COLOR
 
     this.canvas.context.fillRect(0, 0, this.canvas.element.width, this.canvas.element.height)
     this.canvas.context.fill()

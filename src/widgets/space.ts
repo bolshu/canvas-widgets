@@ -1,5 +1,5 @@
-import { Canvas } from '../modules/Canvas'
-import { IWidget } from './widget'
+import { WithCanvas } from './withCanvas'
+import { IWidget } from './types'
 
 type TStart = {
   x: number,
@@ -8,9 +8,9 @@ type TStart = {
   d: number,
 }
 
-export class Space implements IWidget {
+export class Space extends WithCanvas implements IWidget {
   private readonly CLR_STAR: string = 'white'
-  private readonly CLR_BG: string = 'black'
+  private readonly BG_OPACITY: number = 0.75
   private readonly SPEED: number = 8
   private readonly SPEED_MULTIPLIER: number = 0.6
   private readonly STAR_COUNT: number = 80
@@ -19,10 +19,9 @@ export class Space implements IWidget {
   private readonly STAR_SIZE_INCREMENT: number = 0.025
   private stars: TStart[] = []
 
-  private canvas: Canvas
+  constructor (parentNode: HTMLElement) {
+    super(parentNode)
 
-  constructor () {
-    this.canvas = new Canvas('space')
     this.createStars()
     this.tick = this.tick.bind(this)
   }
@@ -74,7 +73,7 @@ export class Space implements IWidget {
   }
 
   private tick (): void {
-    this.canvas.context.fillStyle = 'rgba(0,0,0,0.75)'
+    this.canvas.context.fillStyle = `rgba(0,0,0,${this.BG_OPACITY})`
     this.canvas.context.fillRect(0, 0, this.canvas.element.width, this.canvas.element.height)
 
     this.drawStars()

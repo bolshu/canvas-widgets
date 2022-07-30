@@ -1,11 +1,11 @@
-import { Canvas } from '../modules/Canvas'
-import { IWidget } from './widget'
+import { IWidget } from './types'
+import { WithCanvas } from './withCanvas'
 
 type TLineProps = {
   x1: number, y1: number, p1x: number, p1y: number, x2: number, y2: number, p2x: number, p2y: number, angle: number, r: number
 }
 
-export class Bezier implements IWidget {
+export class Bezier extends WithCanvas implements IWidget {
   private readonly CLR_BG: string = 'blue'
   private readonly CLR_LINE: string = 'rgba(255, 255, 255, 0.25)'
   private readonly LINE_WIDTH: number = 3
@@ -15,10 +15,10 @@ export class Bezier implements IWidget {
   private readonly R_MIN: number = 1
 
   private lines: TLineProps[] = []
-  private canvas: Canvas
 
-  constructor () {
-    this.canvas = new Canvas('bezier')
+  constructor (parentNode: HTMLElement) {
+    super(parentNode)
+
     this.generateLines()
     this.tick = this.tick.bind(this)
   }
