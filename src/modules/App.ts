@@ -40,7 +40,7 @@ export class App {
     {
       title: 'Tunnel',
       id: 'tunnel',
-      isActive: true,
+      isActive: false,
       Widget: Tunnel
     },
     {
