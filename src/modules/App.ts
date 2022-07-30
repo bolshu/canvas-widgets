@@ -1,4 +1,5 @@
 import { Rotation } from '../widgets/rotation'
+import { Tunnel } from '../widgets/tunnel'
 import { Space } from '../widgets/space'
 import { DVDScreen } from '../widgets/dvdScreen'
 import { Rain } from '../widgets/rain'
@@ -7,6 +8,7 @@ import { Sin } from '../widgets/sin'
 
 type TWidgetClass = (
   typeof Rotation |
+  typeof Tunnel |
   typeof Space |
   typeof DVDScreen |
   typeof Rain |
@@ -34,6 +36,12 @@ export class App {
       id: 'rotation',
       isActive: false,
       Widget: Rotation
+    },
+    {
+      title: 'Tunnel',
+      id: 'tunnel',
+      isActive: true,
+      Widget: Tunnel
     },
     {
       title: 'Space',
@@ -76,7 +84,6 @@ export class App {
     this.createNav()
     this.appNav = document.getElementById(this.NODE_ID_NAV)!
     this.addNavClickListener()
-
 
     this.createCanvasWrapper()
     this.appWidget = document.getElementById(this.NODE_ID_WIDGET)!
