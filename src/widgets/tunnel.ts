@@ -16,12 +16,12 @@ type TParticle = {
 
 export class Tunnel extends WithCanvas implements IWidget {
   private readonly SIDEBAR_WIDTH: number = 241
-  private readonly PARTICLES_COUNT: number = 80
-  private readonly PARTICLES_SPAWN_TIME: number = 300
-  private readonly PARTICLE_RADIUS: number = 5
-  private readonly PARTICLE_VELOCITY: number = 5
+  private readonly PARTICLES_COUNT: number = 40
+  private readonly PARTICLES_SPAWN_TIME: number = 150
+  private readonly PARTICLE_RADIUS: number = 4
+  private readonly PARTICLE_VELOCITY: number = 12
   private readonly COLOR_BG: string = 'black'
-  private readonly HUE_INC: number = 0.05
+  private readonly HUE_INC: number = 0.04
   private particles: TParticle[] = []
   private mouse: TCoordinates
   private hue: number = 0
