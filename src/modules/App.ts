@@ -1,3 +1,4 @@
+import { Mountains } from '../widgets/mountains'
 import { Rotation } from '../widgets/rotation'
 import { Tunnel } from '../widgets/tunnel'
 import { Space } from '../widgets/space'
@@ -7,6 +8,7 @@ import { Bezier } from '../widgets/bezier'
 import { Sin } from '../widgets/sin'
 
 type TWidgetClass = (
+  typeof Mountains |
   typeof Rotation |
   typeof Tunnel |
   typeof Space |
@@ -31,6 +33,12 @@ export class App {
   private appNav: HTMLElement
   private appWidget: HTMLElement
   private widgets: TWidget[] = [
+    {
+      title: 'Mountains',
+      id: 'mountains',
+      isActive: true,
+      Widget: Mountains
+    },
     {
       title: 'Rotation',
       id: 'rotation',
